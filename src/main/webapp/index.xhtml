@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"/>
+</h:head>
+<body>
+<h1>C3 - #{serviceName.avg}</h1>
+<h:form>
+    <div class="form-group">
+        <h:outputLabel for="firstName">First name:</h:outputLabel>
+        <h:inputText class="form-control" value="#{serviceName.entityName.firstName}" id="firstName"/>
+        <h:outputLabel for="lastName">Last name:</h:outputLabel>
+        <h:inputText class="form-control" value="#{serviceName.entityName.lastName}" id="lastName"/>
+        <h:outputLabel for="date">Date:</h:outputLabel>
+        <h:inputText class="form-control" value="#{serviceName.entityName.date}" id="date"/>
+        <h:outputLabel for="mark">Mark:</h:outputLabel>
+        <h:inputText class="form-control" value="#{serviceName.entityName.mark}" id="mark"/>
+    </div>
+    <h:commandButton class="btn btn-primary mt-1" value="Create"
+                     action="#{serviceName.createTask()}"/>
+</h:form>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <ui:repeat value="#{serviceName.allTasks}" var="students">
+                <div class="card" style="width: 14rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">#{students.firstName} #{students.lastName}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">#{students.date}</h6>
+                        <p class="card-text">#{students.mark}</p>
+                        <h:form>
+                            <h:commandButton class="btn btn-primary mt-1" value="Delete"
+                                             action="#{serviceName.deleteTask(students.id)}"/>
+                        </h:form>
+                        <h:form>
+                            <div class="form-group">
+                                <h:outputLabel for="firstNameU">First name:</h:outputLabel>
+                                <h:inputText class="form-control" value="#{students.firstName}" id="firstNameU"/>
+                                <h:outputLabel for="lastNameU">Last name:</h:outputLabel>
+                                <h:inputText class="form-control" value="#{students.lastName}" id="lastNameU"/>
+                                <h:outputLabel for="dateU">Date:</h:outputLabel>
+                                <h:inputText class="form-control" value="#{students.date}" id="dateU"/>
+                                <h:outputLabel for="markU">Mark:</h:outputLabel>
+                                <h:inputText class="form-control" value="#{students.mark}" id="markU"/>
+                            </div>
+                            <h:commandButton class="btn btn-primary mt-1" value="Update"
+                                             action="#{serviceName.updateTask(students.id, students.firstName, students.lastName, students.date, students.mark)}"/>
+                        </h:form>
+                    </div>
+                </div>
+            </ui:repeat>
+        </div>
+    </div>
+</div>
+</body>
+</html>
